@@ -17,7 +17,6 @@ from urllib.parse import urlparse, parse_qs, unquote
 # Reasonable default headers to avoid immediate blocking
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
 
-
 def _candidates_from_bing(query: str) -> Iterable[str]:
     try:
         params = {"q": query}
@@ -77,7 +76,7 @@ def _validate_image(url: str, min_size: int = 30 * 1024) -> Optional[int]:
     content-types.
     """
     try:
-        head = requests.head(url, headers=HEADERS, timeout=6, allow_redirects=True)
+        head = requests.head(url, headers=HEADERS, timeout=8, allow_redirects=True)
         ct = head.headers.get("content-type", "")
         if not ct.startswith("image"):
             return None
